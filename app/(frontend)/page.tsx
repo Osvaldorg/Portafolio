@@ -1,7 +1,7 @@
 import { getPortfolioData } from '@/lib/getPortfolioData';
 import PortfolioClient from '@/components/PortfolioClient';
 
-export const revalidate = 0; // Ensure fresh data from CMS
+export const revalidate = 3600; // Cache for 1 hour in production
 
 export default async function Home() {
   const data = await getPortfolioData();

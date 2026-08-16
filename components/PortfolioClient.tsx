@@ -1,14 +1,18 @@
 "use client";
 
-import { useState, useMemo } from 'react';
-import { Mail, Github, Linkedin, ArrowUpRight, MessageCircle } from 'lucide-react';
+import { useMemo } from 'react';
+import { Github, Linkedin, MessageCircle } from 'lucide-react';
 import TerminalHero from '@/components/TerminalHero';
 import MagneticButton from '@/components/MagneticButton';
 import ProjectList from '@/components/ProjectList';
 import SkillsTicker from '@/components/SkillsTicker';
 import ContactForm from '@/components/ContactForm';
 import StatsRow from '@/components/StatsRow';
+import Footer from '@/components/Footer';
+import { useLang } from '@/lib/LanguageContext';
 import { motion, AnimatePresence } from 'motion/react';
+import { Mail, ArrowUpRight } from 'lucide-react';
+import { useState } from 'react';
 import type {
   PersonalInfo,
   ProjectItem,
@@ -71,15 +75,13 @@ export default function PortfolioClient({
   education,
   certifications,
 }: PortfolioClientProps) {
-  const [lang, setLang] = useState<'en' | 'es'>('es');
+  const { lang, setLang, t } = useLang();
   const [isUnlocked, setIsUnlocked] = useState(terminalHasPlayed);
 
   const handleTerminalComplete = () => {
     terminalHasPlayed = true;
     setIsUnlocked(true);
   };
-
-  const t = (en: React.ReactNode, es: React.ReactNode) => lang === 'en' ? en : es;
 
   const bioKeywords = useMemo(
     () => (lang === 'en' ? personalInfo.keywords.en : personalInfo.keywords.es),
@@ -117,16 +119,13 @@ export default function PortfolioClient({
                   {t('Experience', 'Experiencia')}
                 </a>
 
-                {/* Social icons — separated visually */}
+                {/* Social icons — only GitHub & LinkedIn */}
                 <div className="hidden sm:flex items-center gap-3 border-l border-white/10 pl-4">
                   <a href={personalInfo.githubUrl} target="_blank" rel="noreferrer" className="text-white/25 hover:text-white transition-colors" title="GitHub">
                     <Github size={15} />
                   </a>
                   <a href={personalInfo.linkedinUrl} target="_blank" rel="noreferrer" className="text-white/25 hover:text-white transition-colors" title="LinkedIn">
                     <Linkedin size={15} />
-                  </a>
-                  <a href={`mailto:${personalInfo.email}`} className="text-white/25 hover:text-white transition-colors" title="Email">
-                    <Mail size={15} />
                   </a>
                 </div>
 
@@ -186,7 +185,6 @@ export default function PortfolioClient({
                     {t('About', 'Sobre mí')}
                   </p>
                   <div className="relative pl-6 border-l-2 border-[#E8FF00]/20">
-                    {/* Animated accent line */}
                     <motion.div
                       className="absolute left-[-1px] top-0 w-[2px] bg-gradient-to-b from-[#E8FF00] to-[#E8FF00]/0"
                       initial={{ height: 0 }}
@@ -200,7 +198,6 @@ export default function PortfolioClient({
                   </div>
                 </FadeIn>
 
-                {/* Stats Row — dynamic from CMS */}
                 <div className="mt-12">
                   <StatsRow stats={personalInfo.stats} lang={lang} />
                 </div>
@@ -287,7 +284,6 @@ export default function PortfolioClient({
                 </FadeIn>
 
                 <div className="flex flex-col gap-0">
-                  {/* Education items */}
                   <FadeIn>
                     <p className="text-[11px] font-mono text-white/20 uppercase tracking-widest mb-6">
                       {t('Degrees', 'Títulos')}
@@ -310,7 +306,6 @@ export default function PortfolioClient({
                   ))}
                   <div className="editorial-divider" />
 
-                  {/* Certifications / Achievements */}
                   <FadeIn>
                     <p className="text-[11px] font-mono text-white/20 uppercase tracking-widest mt-10 mb-6">
                       {t('Achievements & Certifications', 'Logros y Certificaciones')}
@@ -347,7 +342,6 @@ export default function PortfolioClient({
               <section id="contact" className="pt-12 border-t border-white/[0.06] scroll-mt-24">
                 <FadeIn>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 sm:gap-16">
-                    {/* Left — CTA text */}
                     <div>
                       <p className="text-xs font-mono text-[#E8FF00]/50 tracking-widest uppercase mb-4">
                         {t("Let's work together", "Trabajemos juntos")}
@@ -365,31 +359,30 @@ export default function PortfolioClient({
                         )}
                       </p>
 
-                      {/* Direct contact links */}
-                      <div className="flex flex-col gap-3 text-sm">
-                        <a href={`mailto:${personalInfo.email}`} className="text-white/40 hover:text-[#E8FF00] transition-colors flex items-center gap-3 font-mono">
-                          <Mail size={16} className="text-[#E8FF00]/50" /> {personalInfo.email}
+                      <div className="flex flex-wrap gap-4 mt-2">
+                        <a 
+                          href={`mailto:${personalInfo.email}`} 
+                          title="Email"
+                          className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-[#E8FF00] hover:border-[#E8FF00]/50 hover:bg-[#E8FF00]/5 transition-all"
+                        >
+                          <Mail size={18} />
                         </a>
-                        <a href={personalInfo.githubUrl} target="_blank" rel="noreferrer" className="text-white/40 hover:text-[#E8FF00] transition-colors flex items-center gap-3 font-mono">
-                          <Github size={16} className="text-[#E8FF00]/50" /> GitHub
-                        </a>
-                        <a href={personalInfo.linkedinUrl} target="_blank" rel="noreferrer" className="text-white/40 hover:text-[#E8FF00] transition-colors flex items-center gap-3 font-mono">
-                          <Linkedin size={16} className="text-[#E8FF00]/50" /> LinkedIn
+                        <a 
+                          href={personalInfo.linkedinUrl} 
+                          target="_blank" 
+                          rel="noreferrer" 
+                          title="LinkedIn"
+                          className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-[#E8FF00] hover:border-[#E8FF00]/50 hover:bg-[#E8FF00]/5 transition-all"
+                        >
+                          <Linkedin size={18} />
                         </a>
                       </div>
                     </div>
 
-                    {/* Right — Form */}
                     <div>
                       <ContactForm lang={lang} />
                     </div>
                   </div>
-                </FadeIn>
-
-                <FadeIn delay={0.1}>
-                  <p className="mt-16 text-[11px] font-mono text-white/15">
-                    © 2026 {personalInfo.name}
-                  </p>
                 </FadeIn>
               </section>
 
@@ -397,6 +390,11 @@ export default function PortfolioClient({
           )}
         </AnimatePresence>
       </main>
+
+      {/* ── FOOTER ──────────────────────────────────────── */}
+      {isUnlocked && (
+        <Footer personalInfo={personalInfo} />
+      )}
     </div>
   );
 }
