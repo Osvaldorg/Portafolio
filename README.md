@@ -1,20 +1,47 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+<h1 align="center">💻 Personal Developer Portfolio</h1>
 
-# Run and deploy your AI Studio app
+<p align="center">
+  A modern, highly performant developer portfolio built with Next.js 15 App Router, featuring seamless localization (EN/ES) and dynamic content management via a headless CMS.
+</p>
 
-This contains everything you need to run your app locally.
+<p align="center">
+  <a href="https://portafolio-five-iota-26.vercel.app/"><strong>Live Demo</strong></a>
+</p>
 
-View your app in AI Studio: https://ai.studio/apps/fd0886cf-c603-477d-8123-cee9849b3e3b
+## 🌐 About The Project
 
-## Run Locally
+This project serves as my digital resume and project showcase. Instead of hardcoding the data, I engineered it as a full-stack application with a custom CMS, allowing me to easily add new projects, update my experience, and manage translations without touching the codebase.
 
-**Prerequisites:**  Node.js
+### 🛠️ Built With
 
+* **Framework:** Next.js 15 (App Router)
+* **Language:** TypeScript
+* **CMS & Database:** Payload CMS 3.0, NeonDB (PostgreSQL)
+* **Storage:** Vercel Blob
+* **Styling:** Tailwind CSS
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## ✨ Key Features
+
+- **🌍 Seamless Localization:** Custom Context API implementation that handles English and Spanish translations without relying on heavy i18n libraries, keeping the bundle size minimal.
+- **📝 Headless CMS Integration:** Powered by Payload CMS with a PostgreSQL database to dynamically fetch projects, experience, and skills.
+- **⚡ Next.js 15 Optimizations:** Leverages Server Components (RSC) and optimized image rendering for maximum performance and SEO scores.
+- **🎨 Modern UI/UX:** Fully responsive design with smooth animations and a consistent design system.
+
+## 🧠 What I Learned
+
+- **Next.js 15 App Router & Payload 3.0:** Learned the intricacies of integrating a headless CMS directly into the Next.js App Router, handling Server Components alongside Client Components for optimal hydration.
+- **Database Management:** Configured and connected a serverless PostgreSQL database (NeonDB) and managed object storage (Vercel Blob) for project images.
+- **State Management for Localization:** Designed a lightweight cookie-based language provider that persists user preference across sessions and renders the correct language server-side to prevent UI flickering.
+
+## 🚀 Getting Started
+
+\```bash
+git clone https://github.com/Osvaldorg/Portafolio.git
+npm install
+
+# Generate Payload types based on the schema
+npm run generate:types
+
+# Run the development server
+npm run dev
+\```
