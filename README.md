@@ -16,7 +16,7 @@ This project serves as my digital resume and project showcase. Instead of hardco
 
 * **Framework:** Next.js 15 (App Router)
 * **Language:** TypeScript
-* **CMS & Database:** Payload CMS 3.0, NeonDB (PostgreSQL)
+* **CMS & Database:** Payload CMS 3.0, PostgreSQL (NeonDB)
 * **Storage:** Vercel Blob
 * **Styling:** Tailwind CSS
 
